@@ -1,0 +1,7 @@
+packages: ./
+
+source-repository-package 
+  type: git 
+  location: https://github.com/layer-3-communications/reflex-dom-helpers
+  tag: 7759edbfb9d1432434f64a3b1b7ed86a66e12afa
+
