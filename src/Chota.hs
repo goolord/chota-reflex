@@ -117,7 +117,7 @@ data Helper =
   | Hidden 
   | HidePhone 
   | HideTablet 
-  | BColor BulmaColor
+  -- | BColor BulmaColor
 
 encodeHelper :: Helper -> Text
 encodeHelper x = case x of
@@ -155,33 +155,33 @@ encodeHelper x = case x of
   Hidden          -> "is-hidden"
   HidePhone       -> "hide-phone"
   HideTablet      -> "hide-tablet"
-  BColor c        -> encodeBulmaColor c
+  -- BColor c        -> encodeBulmaColor c
 
 -- | Classes for Bulma's color variables
-data BulmaColor = 
-    BCWhite
-  | BCBlack
-  | BCLight
-  | BCDark
-  | BCPrimary
-  | BCLink
-  | BCInfo
-  | BCSuccess
-  | BCWarning
-  | BCDanger
+-- data BulmaColor = 
+    -- BCWhite
+  -- | BCBlack
+  -- | BCLight
+  -- | BCDark
+  -- | BCPrimary
+  -- | BCLink
+  -- | BCInfo
+  -- | BCSuccess
+  -- | BCWarning
+  -- | BCDanger
 
-encodeBulmaColor :: BulmaColor -> Text
-encodeBulmaColor c = case c of
-  BCWhite   -> "ist-white"
-  BCBlack   -> "ist-black"
-  BCLight   -> "ist-light"
-  BCDark    -> "ist-dark"
-  BCPrimary -> "ist-primary"
-  BCLink    -> "ist-link"
-  BCInfo    -> "ist-info"
-  BCSuccess -> "ist-success"
-  BCWarning -> "ist-warning"
-  BCDanger  -> "ist-danger"
+-- encodeBulmaColor :: BulmaColor -> Text
+-- encodeBulmaColor c = case c of
+  -- BCWhite   -> "ist-white"
+  -- BCBlack   -> "ist-black"
+  -- BCLight   -> "ist-light"
+  -- BCDark    -> "ist-dark"
+  -- BCPrimary -> "ist-primary"
+  -- BCLink    -> "ist-link"
+  -- BCInfo    -> "ist-info"
+  -- BCSuccess -> "ist-success"
+  -- BCWarning -> "ist-warning"
+  -- BCDanger  -> "ist-danger"
 
 chotaButton :: DomBuilder t m => [Helper] -> Map Text Text -> m a -> m a
 chotaButton helper attrs child = elAttr "a" (hclass <> attrs) child
