@@ -24,6 +24,7 @@ import Data.Default.Class
 import Data.Text.Lazy.Builder.Int
 import Data.Text.Lazy.Builder
 import Data.Map.Strict (Map)
+import Web.FontAwesomeType
 import qualified Data.Map.Strict as M
 import qualified Data.Text as T
 import qualified Data.Text.Lazy as TL
@@ -51,6 +52,9 @@ data Icon = Icon
   , iconSize :: Word64
   , iconColor :: RGB
   }
+
+fontAwesomeIcon :: FontAwesome -> Word64 -> RGB -> Icon
+fontAwesomeIcon fa sz color = Icon (T.drop 3 $ fontAwesomeClass fa) sz color
 
 instance Default Icon where
   def = Icon "clarity/search" 16 (RGB 0x00 0x00 0x00)
@@ -113,6 +117,7 @@ data Helper =
   | Hidden 
   | HidePhone 
   | HideTablet 
+  | BColor BulmaColor
 
 encodeHelper :: Helper -> Text
 encodeHelper x = case x of
@@ -150,6 +155,33 @@ encodeHelper x = case x of
   Hidden          -> "is-hidden"
   HidePhone       -> "hide-phone"
   HideTablet      -> "hide-tablet"
+  BColor c        -> encodeBulmaColor c
+
+-- | Classes for Bulma's color variables
+data BulmaColor = 
+    BCWhite
+  | BCBlack
+  | BCLight
+  | BCDark
+  | BCPrimary
+  | BCLink
+  | BCInfo
+  | BCSuccess
+  | BCWarning
+  | BCDanger
+
+encodeBulmaColor :: BulmaColor -> Text
+encodeBulmaColor c = case c of
+  BCWhite   -> "ist-white"
+  BCBlack   -> "ist-black"
+  BCLight   -> "ist-light"
+  BCDark    -> "ist-dark"
+  BCPrimary -> "ist-primary"
+  BCLink    -> "ist-link"
+  BCInfo    -> "ist-info"
+  BCSuccess -> "ist-success"
+  BCWarning -> "ist-warning"
+  BCDanger  -> "ist-danger"
 
 chotaButton :: DomBuilder t m => [Helper] -> Map Text Text -> m a -> m a
 chotaButton helper attrs child = elAttr "a" (hclass <> attrs) child
